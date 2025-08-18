@@ -1,10 +1,40 @@
+import { getDestinations } from "@/api/destination";
+import BookingDialog from "@/components/BookingDialog";
 import SearchBox from "@/components/SearchBox";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { useAuth } from "@/contexts/AuthContext";
+import type { Destination } from "@/types";
+import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { useState } from "react";
-export default function Home() {
-  const [searchTerm, setSearchTerm] = useState<string>("");
 
-  console.log(searchTerm);
+export default function Home() {
+  const { isAuthenticated } = useAuth();
+  const [selectedDestination, setSelectedDestination] =
+    useState<Destination | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const { data: destinations = [] } = useQuery({
+    queryKey: ["destinations"],
+    queryFn: getDestinations,
+  });
+
+  const filteredDestinations = destinations.filter((dest) =>
+    dest.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleBookNow = (destination: Destination) => {
+    setSelectedDestination(destination);
+    if (isAuthenticated) {
+      setIsDialogOpen(true);
+    } else {
+      localStorage.setItem("bookingData", JSON.stringify({ destination }));
+      window.location.href = "/auth";
+    }
+  };
+
   return (
     <div className="space-y-8">
       <section className="relative h-[400px] w-full overflow-hidden rounded-lg bg-gray-900">
@@ -41,6 +71,48 @@ export default function Home() {
           className="h-full w-full object-cover"
         />
       </section>
+
+      <section className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {filteredDestinations.map((destination, index) => (
+          <motion.div
+            key={destination.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileHover={{ scale: 1.03 }}
+          >
+            <Card>
+              <CardContent className="p-0">
+                <img
+                  src={destination.image}
+                  alt={destination.name}
+                  className="h-48 w-full rounded-t-lg object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="text-xl font-semibold">{destination.name}</h3>
+                  <p className="mt-2 text-sm text-gray-600">
+                    {destination.description}
+                  </p>
+                  <div className="mt-4 flex items-center justify-between">
+                    <span className="font-bold">${destination.price}</span>
+                    <Button onClick={() => handleBookNow(destination)}>
+                      Book Now
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </section>
+
+      {selectedDestination && (
+        <BookingDialog
+          destination={selectedDestination}
+          open={isDialogOpen}
+          onOpenChange={setIsDialogOpen}
+        />
+      )}
     </div>
   );
 }
