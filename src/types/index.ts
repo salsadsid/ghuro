@@ -12,6 +12,7 @@ export interface Destination {
   image: string;
   price: number;
   rating: number;
+  videoUrl?: string;
 }
 
 export interface BookingData {

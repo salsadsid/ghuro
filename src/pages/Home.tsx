@@ -7,7 +7,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import type { Destination } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const { isAuthenticated } = useAuth();
@@ -15,6 +15,17 @@ export default function Home() {
     useState<Destination | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [storedBooking, setStoredBooking] = useState<any>(null);
+  // On mount, check for stored booking data if authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      const bookingData = localStorage.getItem("bookingData");
+      if (bookingData) {
+        setStoredBooking(JSON.parse(bookingData));
+        localStorage.removeItem("bookingData");
+      }
+    }
+  }, [isAuthenticated]);
 
   const { data: destinations = [] } = useQuery({
     queryKey: ["destinations"],
@@ -37,6 +48,18 @@ export default function Home() {
 
   return (
     <div className="space-y-8">
+      {storedBooking && (
+        <div className="rounded-lg bg-green-100 p-4 text-green-800 shadow">
+          <h2 className="text-lg font-bold mb-2">Booking Confirmed!</h2>
+          <p>
+            Your trip to{" "}
+            <span className="font-semibold">
+              {storedBooking.destination.name}
+            </span>{" "}
+            has been booked.
+          </p>
+        </div>
+      )}
       <section className="relative h-[400px] w-full overflow-hidden rounded-lg bg-gray-900">
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 text-center text-white">
           <motion.h1

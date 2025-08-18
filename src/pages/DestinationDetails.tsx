@@ -1,6 +1,7 @@
 import { getDestinationById } from "@/api/destination";
 import BookingDialog from "@/components/BookingDialog";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useAuth } from "@/contexts/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
@@ -10,6 +11,7 @@ export default function DestinationDetails() {
   const { id } = useParams();
   const { isAuthenticated } = useAuth();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   const { data: destination } = useQuery({
     queryKey: ["destination", id],
@@ -36,7 +38,8 @@ export default function DestinationDetails() {
           <img
             src={destination.image}
             alt={destination.name}
-            className="rounded-lg"
+            className="rounded-lg cursor-pointer"
+            onClick={() => setIsVideoOpen(true)}
           />
         </div>
 
@@ -82,6 +85,24 @@ export default function DestinationDetails() {
           onOpenChange={setIsDialogOpen}
         />
       )}
+
+      {/* Image popup with video */}
+      <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
+        <DialogContent className="max-w-xl">
+          <div className="aspect-video w-full">
+            <video controls className="w-full h-full rounded-lg">
+              <source
+                src={
+                  destination.videoUrl ||
+                  "https://www.w3schools.com/html/mov_bbb.mp4"
+                }
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
