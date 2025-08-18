@@ -1,5 +1,6 @@
 import { getDestinationById } from "@/api/destination";
 import BookingDialog from "@/components/BookingDialog";
+import BookingFormDialog from "@/components/BookingFormDialog";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useAuth } from "@/contexts/AuthContext";
@@ -11,6 +12,7 @@ export default function DestinationDetails() {
   const { id } = useParams();
   const { isAuthenticated } = useAuth();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isFormDialogOpen, setIsFormDialogOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   const { data: destination } = useQuery({
@@ -22,8 +24,7 @@ export default function DestinationDetails() {
     if (isAuthenticated) {
       setIsDialogOpen(true);
     } else {
-      localStorage.setItem("bookingData", JSON.stringify({ destination }));
-      window.location.href = "/auth";
+      setIsFormDialogOpen(true);
     }
   };
 
@@ -79,11 +80,18 @@ export default function DestinationDetails() {
       </div>
 
       {destination && (
-        <BookingDialog
-          destination={destination}
-          open={isDialogOpen}
-          onOpenChange={setIsDialogOpen}
-        />
+        <>
+          <BookingDialog
+            destination={destination}
+            open={isDialogOpen}
+            onOpenChange={setIsDialogOpen}
+          />
+          <BookingFormDialog
+            destination={destination}
+            open={isFormDialogOpen}
+            onOpenChange={setIsFormDialogOpen}
+          />
+        </>
       )}
 
       {/* Image popup with video */}

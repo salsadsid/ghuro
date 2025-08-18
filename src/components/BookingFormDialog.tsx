@@ -20,14 +20,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
 import type { Destination } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -40,10 +39,12 @@ const formSchema = z.object({
   phone: z.string().min(10, {
     message: "Phone number must be at least 10 digits.",
   }),
-  date: z.date(),
+  date: z.date().refine((val) => val instanceof Date && !isNaN(val.getTime()), {
+    message: "Please select a date for your booking.",
+  }),
 });
 
-export default function BookingDialog({
+export default function BookingFormDialog({
   destination,
   open,
   onOpenChange,
@@ -52,56 +53,30 @@ export default function BookingDialog({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
-  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: user?.name || "",
-      email: user?.email || "",
+      name: "",
+      email: "",
       phone: "",
       date: undefined,
     },
   });
 
-  // Load saved booking data from localStorage when dialog opens
-  useEffect(() => {
-    if (open) {
-      const savedData = localStorage.getItem("pendingBookingData");
-      if (savedData) {
-        const parsedData = JSON.parse(savedData);
-        if (parsedData.destination.id === destination.id) {
-          form.setValue("name", parsedData.name || user?.name || "");
-          form.setValue("email", parsedData.email || user?.email || "");
-          form.setValue("phone", parsedData.phone || "");
-          if (parsedData.date) {
-            form.setValue("date", new Date(parsedData.date));
-          }
-          // Clear the saved data after loading
-          localStorage.removeItem("pendingBookingData");
-        }
-      }
-    }
-  }, [open, destination.id, form, user]);
-
   function onSubmit(values: z.infer<typeof formSchema>) {
-    const bookingData = {
+    const bookingFormData = {
       destination,
       ...values,
       date: format(values.date, "yyyy-MM-dd"),
     };
 
-    // Save to local storage (in a real app, you'd send to an API)
-    localStorage.setItem("completedBooking", JSON.stringify(bookingData));
+    // Save booking form data to localStorage
+    localStorage.setItem("pendingBookingData", JSON.stringify(bookingFormData));
 
-    // Show success message
-    alert(
-      `Booking confirmed! Your trip to ${
-        destination.name
-      } has been booked for ${format(values.date, "PPP")}.`
-    );
-
-    onOpenChange(false);
+    // Redirect to login page
+    navigate("/auth");
   }
 
   return (
@@ -109,6 +84,10 @@ export default function BookingDialog({
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Book {destination.name}</DialogTitle>
+          <p className="text-sm text-gray-600">
+            Please fill in your details. You'll need to log in to confirm your
+            booking.
+          </p>
         </DialogHeader>
 
         <div className="space-y-4">
@@ -203,7 +182,7 @@ export default function BookingDialog({
               />
 
               <Button type="submit" className="w-full">
-                Confirm Booking
+                Continue to Login
               </Button>
             </form>
           </Form>

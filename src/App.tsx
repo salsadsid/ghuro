@@ -1,4 +1,5 @@
 import { AuthProvider } from "@/contexts/AuthContext";
+import DestinationDetails from "@/pages/DestinationDetails";
 import Home from "@/pages/Home";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -16,6 +17,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/auth" element={<Auth />} />
+              <Route path="/destination/:id" element={<DestinationDetails />} />
             </Routes>
           </Layout>
           {/* TODO */}

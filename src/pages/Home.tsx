@@ -1,5 +1,6 @@
 import { getDestinations } from "@/api/destination";
 import BookingDialog from "@/components/BookingDialog";
+import BookingFormDialog from "@/components/BookingFormDialog";
 import SearchBox from "@/components/SearchBox";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,21 +9,34 @@ import type { Destination } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const [selectedDestination, setSelectedDestination] =
     useState<Destination | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isFormDialogOpen, setIsFormDialogOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [storedBooking, setStoredBooking] = useState<any>(null);
+
   // On mount, check for stored booking data if authenticated
   useEffect(() => {
     if (isAuthenticated) {
       const bookingData = localStorage.getItem("bookingData");
+      const pendingBookingData = localStorage.getItem("pendingBookingData");
+
       if (bookingData) {
         setStoredBooking(JSON.parse(bookingData));
         localStorage.removeItem("bookingData");
+      }
+
+      // If there's pending booking data, open the booking dialog with pre-filled data
+      if (pendingBookingData) {
+        const parsedData = JSON.parse(pendingBookingData);
+        setSelectedDestination(parsedData.destination);
+        setIsDialogOpen(true);
       }
     }
   }, [isAuthenticated]);
@@ -41,8 +55,7 @@ export default function Home() {
     if (isAuthenticated) {
       setIsDialogOpen(true);
     } else {
-      localStorage.setItem("bookingData", JSON.stringify({ destination }));
-      window.location.href = "/auth";
+      setIsFormDialogOpen(true);
     }
   };
 
@@ -109,10 +122,16 @@ export default function Home() {
                 <img
                   src={destination.image}
                   alt={destination.name}
-                  className="h-48 w-full rounded-t-lg object-cover"
+                  className="h-48 w-full rounded-t-lg object-cover cursor-pointer"
+                  onClick={() => navigate(`/destination/${destination.id}`)}
                 />
                 <div className="p-4">
-                  <h3 className="text-xl font-semibold">{destination.name}</h3>
+                  <h3
+                    className="text-xl font-semibold cursor-pointer hover:text-blue-600"
+                    onClick={() => navigate(`/destination/${destination.id}`)}
+                  >
+                    {destination.name}
+                  </h3>
                   <p className="mt-2 text-sm text-gray-600">
                     {destination.description}
                   </p>
@@ -130,11 +149,18 @@ export default function Home() {
       </section>
 
       {selectedDestination && (
-        <BookingDialog
-          destination={selectedDestination}
-          open={isDialogOpen}
-          onOpenChange={setIsDialogOpen}
-        />
+        <>
+          <BookingDialog
+            destination={selectedDestination}
+            open={isDialogOpen}
+            onOpenChange={setIsDialogOpen}
+          />
+          <BookingFormDialog
+            destination={selectedDestination}
+            open={isFormDialogOpen}
+            onOpenChange={setIsFormDialogOpen}
+          />
+        </>
       )}
     </div>
   );
