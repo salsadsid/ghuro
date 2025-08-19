@@ -20,34 +20,38 @@ export default function Navbar({
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center justify-between">
-        <Link to="/" className="text-xl font-bold">
+      <div className="container mx-auto flex h-20 items-center justify-between px-6 max-w-7xl">
+        <Link to="/" className="text-2xl font-bold">
           TravelApp
         </Link>
 
-        <nav className="flex items-center gap-4">
-          <Link to="/" className="text-sm font-medium hover:underline">
+        <nav className="flex items-center gap-8">
+          <Link to="/" className="text-lg font-medium hover:underline">
             Home
           </Link>
-          <Link to="/about" className="text-sm font-medium hover:underline">
+          <Link to="/about" className="text-lg font-medium hover:underline">
             About
           </Link>
 
           {isAuthenticated ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Avatar className="h-8 w-8 cursor-pointer">
+                <Avatar className="h-10 w-10 cursor-pointer">
                   <AvatarImage src={user?.avatar} />
                   <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+                <DropdownMenuItem onClick={logout} className="text-base">
+                  Logout
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
             <Link to="/auth">
-              <Button variant="outline">Login</Button>
+              <Button variant="outline" className="h-12 px-6 text-base">
+                Login
+              </Button>
             </Link>
           )}
         </nav>

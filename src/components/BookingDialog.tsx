@@ -106,28 +106,34 @@ export default function BookingDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
-          <DialogTitle>Book {destination.name}</DialogTitle>
+          <DialogTitle className="text-2xl">
+            Book {destination.name}
+          </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-4">
+        <div className="space-y-6">
           <img
             src={destination.image}
             alt={destination.name}
-            className="h-48 w-full rounded-lg object-cover"
+            className="h-64 w-full rounded-lg object-cover"
           />
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
                 control={form.control}
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel className="text-base">Full Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Your name" {...field} />
+                      <Input
+                        placeholder="Your name"
+                        className="h-12 text-base"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -139,9 +145,13 @@ export default function BookingDialog({
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel className="text-base">Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Your email" {...field} />
+                      <Input
+                        placeholder="Your email"
+                        className="h-12 text-base"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -153,9 +163,13 @@ export default function BookingDialog({
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
+                    <FormLabel className="text-base">Phone Number</FormLabel>
                     <FormControl>
-                      <Input placeholder="Your phone number" {...field} />
+                      <Input
+                        placeholder="Your phone number"
+                        className="h-12 text-base"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -167,14 +181,14 @@ export default function BookingDialog({
                 name="date"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>Travel Date</FormLabel>
+                    <FormLabel className="text-base">Travel Date</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
                           <Button
                             variant="outline"
                             className={cn(
-                              "pl-3 text-left font-normal",
+                              "pl-4 text-left font-normal h-12 text-base",
                               !field.value && "text-muted-foreground"
                             )}
                           >
@@ -183,7 +197,7 @@ export default function BookingDialog({
                             ) : (
                               <span>Pick a date</span>
                             )}
-                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            <CalendarIcon className="ml-auto h-5 w-5 opacity-50" />
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
@@ -202,7 +216,7 @@ export default function BookingDialog({
                 )}
               />
 
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full h-12 text-base">
                 Confirm Booking
               </Button>
             </form>
