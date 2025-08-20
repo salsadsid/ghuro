@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/contexts/AuthContext";
-import { Bell, Heart, LogOut, Plane, Settings, User } from "lucide-react";
+import { Bell, Heart, User } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Navbar({
@@ -21,43 +21,37 @@ export default function Navbar({
   const { logout } = useAuth();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 shadow-sm">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-20 items-center justify-between px-6 max-w-7xl">
-        <Link to="/" className="flex items-center space-x-3 group">
-          <div className="bg-gradient-primary p-2 rounded-xl group-hover:scale-110 transition-transform duration-300">
-            <Plane className="h-6 w-6 text-white" />
-          </div>
-          <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Ghuro
-          </span>
+        <Link
+          to="/"
+          className="text-2xl font-bold text-yellow-600 hover:text-yellow-700 transition-colors"
+        >
+          Ghuro
         </Link>
 
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="flex items-center gap-8">
           <Link
             to="/"
-            className="text-lg font-medium text-foreground hover:text-primary transition-colors duration-200 relative group"
+            className="text-lg font-medium hover:text-yellow-600 transition-colors"
           >
             Home
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-all duration-300"></span>
           </Link>
           <Link
             to="/about"
-            className="text-lg font-medium text-foreground hover:text-primary transition-colors duration-200 relative group"
+            className="text-lg font-medium hover:text-yellow-600 transition-colors"
           >
             About
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-all duration-300"></span>
           </Link>
-        </nav>
 
-        <div className="flex items-center space-x-4">
           {isAuthenticated ? (
-            <>
+            <div className="flex items-center space-x-4">
               {/* Wishlist Button */}
               <Link to="/wishlist">
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="p-3 hover:bg-primary/10 hover:text-primary transition-all duration-200 rounded-xl"
+                  className="p-2 hover:bg-yellow-50 hover:text-yellow-600"
                 >
                   <Heart className="h-5 w-5" />
                 </Button>
@@ -68,12 +62,12 @@ export default function Navbar({
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="p-3 hover:bg-primary/10 hover:text-primary transition-all duration-200 rounded-xl relative"
+                  className="p-2 relative hover:bg-yellow-50 hover:text-yellow-600"
                 >
                   <Bell className="h-5 w-5" />
                   {/* Notification badge */}
-                  <span className="absolute -top-1 -right-1 h-5 w-5 bg-gradient-to-r from-orange-400 to-red-500 rounded-full text-xs text-white flex items-center justify-center animate-pulse">
-                    3
+                  <span className="absolute -top-1 -right-1 bg-yellow-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                    2
                   </span>
                 </Button>
               </Link>
@@ -81,98 +75,62 @@ export default function Navbar({
               {/* User Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    className="relative h-10 w-10 rounded-full"
-                  >
-                    <Avatar className="h-10 w-10">
-                      <AvatarImage src={user?.avatar} />
-                      <AvatarFallback className="bg-gradient-primary text-white font-semibold">
-                        {user?.name?.charAt(0) || "U"}
-                      </AvatarFallback>
-                    </Avatar>
-                  </Button>
+                  <Avatar className="h-10 w-10 cursor-pointer ring-2 ring-transparent hover:ring-yellow-300 transition-all">
+                    <AvatarImage src={user?.avatar} />
+                    <AvatarFallback className="bg-yellow-100 text-yellow-700">
+                      {user?.name?.charAt(0)}
+                    </AvatarFallback>
+                  </Avatar>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="end"
-                  className="w-56 bg-card border-border shadow-elegant"
-                >
-                  <div className="flex items-center justify-start gap-2 p-2">
-                    <div className="flex flex-col space-y-1 leading-none">
-                      <p className="font-medium text-sm">
-                        {user?.name || "User"}
-                      </p>
-                      <p className="w-[200px] truncate text-xs text-muted-foreground">
-                        {user?.email || "user@example.com"}
-                      </p>
-                    </div>
-                  </div>
-                  <DropdownMenuSeparator />
+                <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuItem asChild>
                     <Link
                       to="/dashboard"
-                      className="flex items-center space-x-2 cursor-pointer"
+                      className="flex items-center space-x-2 hover:bg-yellow-50"
                     >
-                      <User className="h-4 w-4" />
+                      <User className="h-4 w-4 text-yellow-600" />
                       <span>Dashboard</span>
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link
                       to="/wishlist"
-                      className="flex items-center space-x-2 cursor-pointer"
+                      className="flex items-center space-x-2 hover:bg-yellow-50"
                     >
-                      <Heart className="h-4 w-4" />
+                      <Heart className="h-4 w-4 text-yellow-600" />
                       <span>Wishlist</span>
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link
                       to="/notifications"
-                      className="flex items-center space-x-2 cursor-pointer"
+                      className="flex items-center space-x-2 hover:bg-yellow-50"
                     >
-                      <Bell className="h-4 w-4" />
+                      <Bell className="h-4 w-4 text-yellow-600" />
                       <span>Notifications</span>
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link
-                      to="/settings"
-                      className="flex items-center space-x-2 cursor-pointer"
-                    >
-                      <Settings className="h-4 w-4" />
-                      <span>Settings</span>
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={logout}
-                    className="flex items-center space-x-2 cursor-pointer text-destructive focus:text-destructive"
+                    className="text-base hover:bg-red-50 hover:text-red-600"
                   >
-                    <LogOut className="h-4 w-4" />
-                    <span>Logout</span>
+                    Logout
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            </>
-          ) : (
-            <div className="flex items-center space-x-3">
-              <Link to="/auth">
-                <Button
-                  variant="outline"
-                  className="h-10 px-6 border-primary/20 hover:bg-primary/10 hover:text-primary transition-all duration-200"
-                >
-                  Login
-                </Button>
-              </Link>
-              <Link to="/auth">
-                <Button className="h-10 px-6 bg-gradient-primary hover:shadow-lg transition-all duration-300">
-                  Sign Up
-                </Button>
-              </Link>
             </div>
+          ) : (
+            <Link to="/auth">
+              <Button
+                variant="outline"
+                className="h-12 px-6 text-base border-yellow-300 text-yellow-600 hover:bg-yellow-50 hover:border-yellow-400"
+              >
+                Login
+              </Button>
+            </Link>
           )}
-        </div>
+        </nav>
       </div>
     </header>
   );

@@ -66,8 +66,8 @@ export function WishlistButton({ destination, onToggle }: WishlistButtonProps) {
       onClick={toggleWishlist}
       className={`p-2 ${
         isInWishlist
-          ? "text-red-500 hover:text-red-600"
-          : "text-gray-400 hover:text-red-500"
+          ? "text-yellow-500 hover:text-yellow-600"
+          : "text-gray-400 hover:text-yellow-500"
       }`}
     >
       <Heart className={`h-5 w-5 ${isInWishlist ? "fill-current" : ""}`} />

@@ -75,7 +75,7 @@ export default function FilterPanel({
       <Button
         onClick={onToggle}
         variant="outline"
-        className="fixed top-24 right-6 z-40 h-12 px-4"
+        className="fixed top-24 right-6 z-40 h-12 px-4 border-yellow-300 text-yellow-600 hover:bg-yellow-50"
       >
         <Filter className="h-5 w-5 mr-2" />
         Filters
@@ -89,13 +89,13 @@ export default function FilterPanel({
           className="fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 overflow-y-auto"
         >
           <Card className="h-full border-0 rounded-none">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-              <CardTitle className="text-xl">Filters</CardTitle>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 border-b border-yellow-100">
+              <CardTitle className="text-xl text-yellow-700">Filters</CardTitle>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={onToggle}
-                className="h-8 w-8 p-0"
+                className="h-8 w-8 p-0 hover:bg-yellow-50 hover:text-yellow-600"
               >
                 <X className="h-4 w-4" />
               </Button>
@@ -104,7 +104,9 @@ export default function FilterPanel({
             <CardContent className="space-y-6">
               {/* Price Range */}
               <div className="space-y-3">
-                <Label className="text-base font-medium">Price Range</Label>
+                <Label className="text-base font-medium text-gray-700">
+                  Price Range
+                </Label>
                 <Slider
                   value={filters.priceRange}
                   onValueChange={(value: number[]) =>
@@ -115,7 +117,7 @@ export default function FilterPanel({
                   step={100}
                   className="w-full"
                 />
-                <div className="flex justify-between text-sm text-gray-600">
+                <div className="flex justify-between text-sm text-yellow-600 font-medium">
                   <span>${filters.priceRange[0]}</span>
                   <span>${filters.priceRange[1]}</span>
                 </div>
@@ -123,13 +125,15 @@ export default function FilterPanel({
 
               {/* Minimum Rating */}
               <div className="space-y-3">
-                <Label className="text-base font-medium">Minimum Rating</Label>
+                <Label className="text-base font-medium text-gray-700">
+                  Minimum Rating
+                </Label>
                 <Select
                   onValueChange={(value: string) =>
                     handleFilterChange("rating", Number(value))
                   }
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="border-yellow-200 focus:border-yellow-400 focus:ring-yellow-200">
                     <SelectValue placeholder="Any rating" />
                   </SelectTrigger>
                   <SelectContent>
@@ -143,13 +147,15 @@ export default function FilterPanel({
 
               {/* Location */}
               <div className="space-y-3">
-                <Label className="text-base font-medium">Region</Label>
+                <Label className="text-base font-medium text-gray-700">
+                  Region
+                </Label>
                 <Select
                   onValueChange={(value: string) =>
                     handleFilterChange("location", value)
                   }
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="border-yellow-200 focus:border-yellow-400 focus:ring-yellow-200">
                     <SelectValue placeholder="Any location" />
                   </SelectTrigger>
                   <SelectContent>
@@ -165,13 +171,15 @@ export default function FilterPanel({
 
               {/* Duration */}
               <div className="space-y-3">
-                <Label className="text-base font-medium">Trip Duration</Label>
+                <Label className="text-base font-medium text-gray-700">
+                  Trip Duration
+                </Label>
                 <Select
                   onValueChange={(value: string) =>
                     handleFilterChange("duration", value)
                   }
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="border-yellow-200 focus:border-yellow-400 focus:ring-yellow-200">
                     <SelectValue placeholder="Any duration" />
                   </SelectTrigger>
                   <SelectContent>
@@ -185,7 +193,9 @@ export default function FilterPanel({
 
               {/* Activities */}
               <div className="space-y-3">
-                <Label className="text-base font-medium">Activities</Label>
+                <Label className="text-base font-medium text-gray-700">
+                  Activities
+                </Label>
                 <div className="grid grid-cols-2 gap-2">
                   {activities.map((activity) => (
                     <Button
@@ -215,7 +225,7 @@ export default function FilterPanel({
               {/* Reset Filters */}
               <Button
                 variant="outline"
-                className="w-full"
+                className="w-full mt-6"
                 onClick={resetFilters}
               >
                 Reset All Filters
