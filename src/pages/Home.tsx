@@ -2,6 +2,7 @@ import { getDestinations } from "@/api/destination";
 import BookingDialog from "@/components/BookingDialog";
 import BookingFormDialog from "@/components/BookingFormDialog";
 import SearchBox from "@/components/SearchBox";
+import { WishlistButton } from "@/components/Wishlist";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/contexts/AuthContext";
@@ -120,14 +121,17 @@ export default function Home() {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             whileHover={{ scale: 1.03 }}
           >
-            <Card className="h-full">
-              <CardContent className="p-0">
+            <Card className="h-full py-0">
+              <CardContent className="!p-0 relative">
                 <img
                   src={destination.image}
                   alt={destination.name}
                   className="h-64 w-full rounded-t-lg object-cover cursor-pointer"
                   onClick={() => navigate(`/destination/${destination.id}`)}
                 />
+                <div className="absolute top-2 right-2">
+                  <WishlistButton destination={destination} />
+                </div>
                 <div className="p-6">
                   <h3
                     className="text-2xl font-semibold cursor-pointer hover:text-yellow-600 mb-3"

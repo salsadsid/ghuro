@@ -14,20 +14,12 @@ const mockDestinations: Destination[] = [
   {
     id: "2",
     name: "Sundarbans, Bangladesh",
-    description: "UNESCO World Heritage mangrove forest and Bengal tiger habitat",
+    description:
+      "UNESCO World Heritage mangrove forest and Bengal tiger habitat",
     image:
       "https://images.unsplash.com/photo-1571068316344-75bc76f77890?q=80&w=2670&auto=format&fit=crop",
     price: 650,
     rating: 4.5,
-  },
-  {
-    id: "3",
-    name: "Sylhet Tea Gardens, Bangladesh",
-    description: "Rolling hills covered with lush green tea plantations",
-    image:
-      "https://images.unsplash.com/photo-1563822249366-cc4a8357d4b9?q=80&w=2673&auto=format&fit=crop",
-    price: 550,
-    rating: 4.7,
   },
   {
     id: "4",
