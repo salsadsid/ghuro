@@ -131,7 +131,7 @@ export default function WishlistPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 container mx-auto px-4 py-12">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}

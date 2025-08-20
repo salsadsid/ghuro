@@ -27,7 +27,7 @@ export default function Navbar({
           to="/"
           className="text-2xl font-bold text-yellow-600 hover:text-yellow-700 transition-colors"
         >
-          Ghuro
+          ⛱ Ghuro
         </Link>
 
         <nav className="flex items-center gap-8">

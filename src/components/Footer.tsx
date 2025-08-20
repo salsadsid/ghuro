@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import {
   Facebook,
@@ -26,7 +25,6 @@ export default function Footer() {
   const destinations = [
     { name: "Cox's Bazar", path: "/destination/1" },
     { name: "Sundarbans", path: "/destination/2" },
-    { name: "Sylhet Tea Gardens", path: "/destination/3" },
     { name: "Bandarban Hills", path: "/destination/4" },
     { name: "Saint Martin's Island", path: "/destination/5" },
     { name: "Rangamati", path: "/destination/6" },
@@ -50,37 +48,6 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-900 text-white">
-      {/* Newsletter Section */}
-      <div className="bg-yellow-500 text-gray-900">
-        <div className="container mx-auto px-4 py-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center max-w-2xl mx-auto"
-          >
-            <h2 className="text-3xl font-bold mb-4">
-              Get Travel Tips & Exclusive Deals
-            </h2>
-            <p className="text-lg mb-8">
-              Subscribe to our newsletter and never miss out on amazing
-              destinations and special offers.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-900"
-              />
-              <Button className="bg-gray-900 hover:bg-gray-800 text-white px-6 py-3">
-                Subscribe
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-
       {/* Main Footer Content */}
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

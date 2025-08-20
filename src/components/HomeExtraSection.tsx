@@ -2,8 +2,24 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { Award, Clock, MapPin, Shield, Star, Users } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function HomeExtraSection() {
+  const navigate = useNavigate();
+
+  const handleStartPlanning = () => {
+    // Navigate to home and scroll to destinations section
+    navigate("/");
+    setTimeout(() => {
+      const destinationsSection = document.querySelector(
+        '[data-section="destinations"]'
+      );
+      if (destinationsSection) {
+        destinationsSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+  };
+
   const stats = [
     {
       icon: Users,
@@ -267,16 +283,10 @@ export default function HomeExtraSection() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
+                onClick={handleStartPlanning}
                 className="bg-white text-yellow-600 hover:bg-gray-100 font-semibold px-8 py-3"
               >
                 Start Planning
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-yellow-600 font-semibold px-8 py-3"
-              >
-                View All Destinations
               </Button>
             </div>
           </motion.div>
