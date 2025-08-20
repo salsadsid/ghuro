@@ -377,8 +377,8 @@ export default function DestinationDetails() {
       {/* YouTube Video Modal */}
       <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
         <DialogContent className="max-w-7xl w-[90vw] p-0">
-          <div className="relative bg-black rounded-lg overflow-hidden">
-            <div className="aspect-video">
+          <div className="relative bg-black rounded-lg overflow-hidden w-full">
+            <div className="aspect-video w-full">
               <iframe
                 width="100%"
                 height="100%"
@@ -389,7 +389,7 @@ export default function DestinationDetails() {
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
-                className="rounded-lg"
+                className="rounded-lg w-full h-full"
               ></iframe>
             </div>
 
