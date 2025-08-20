@@ -13,7 +13,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar isAuthenticated={isAuthenticated} user={user} />
-      <main className="container mx-auto px-6 py-12 max-w-7xl">
+      <main>
         {children}
         <Outlet />
       </main>

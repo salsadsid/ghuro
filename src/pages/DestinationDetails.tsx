@@ -54,15 +54,15 @@ export default function DestinationDetails() {
       "Cox's Bazar": "1nM-kKDJ-4o", // Example YouTube video ID
       Sundarbans: "Nc99FJi5q1Q",
       Sylhet: "dQw4w9WgXcQ",
-      Bandarban: "dQw4w9WgXcQ",
-      "Saint Martin's Island": "dQw4w9WgXcQ",
-      Rangamati: "dQw4w9WgXcQ",
-      Bali: "dQw4w9WgXcQ",
-      Paris: "dQw4w9WgXcQ",
-      Tokyo: "dQw4w9WgXcQ",
-      "New York": "dQw4w9WgXcQ",
-      Rome: "dQw4w9WgXcQ",
-      Sydney: "dQw4w9WgXcQ",
+      Bandarban: "li19jWVzUPU",
+      "Saint Martin's Island": "U7JzEl2AGb0",
+      Rangamati: "ABHQnTANmBE",
+      Bali: "BFS9n4B_2xA",
+      Paris: "AQ6GmpMu5L8",
+      Tokyo: "cS-hFKC_RKI",
+      "New York": "flqL0IZOZvY",
+      Rome: "XBbzOKhG1bQ",
+      Sydney: "HRg1gJi6yqc",
     };
 
     // Find video by checking if destination name contains key
