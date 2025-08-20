@@ -1,207 +1,233 @@
-# Ghuro - Travel Booking Platform
+# Ghuro - Travel Booking Platform 🌍✈️
 
-A modern, feature-rich travel booking application built with React, TypeScript, and Vite.
+A modern, comprehensive travel booking application built with React, TypeScript, and Vite. Ghuro offers an immersive travel experience with stunning visuals, smooth animations, and intuitive user interface designed to inspire wanderlust and simplify travel planning.
 
 ## 🚀 Live Demo
 
-**Production Site**: [https://ghuro-v2n43gux5-salsadsids-projects.vercel.app](https://ghuro-v2n43gux5-salsadsids-projects.vercel.app)
+**Production Site**: [https://ghuro.vercel.app/](https://ghuro.vercel.app/)
 
-## ✨ Features
+## ✨ Key Features
 
-- **Modern UI/UX**: Clean, responsive design with enhanced typography and spacing
-- **Advanced Filtering**: Filter destinations by price, rating, location, duration, and activities
-- **User Dashboard**: Personal dashboard with booking history and statistics
-- **Wishlist System**: Save and manage favorite destinations
-- **Review & Rating**: Rate and review destinations with star ratings
-- **Notifications Center**: Stay updated with booking confirmations and travel tips
-- **Authentication**: Secure user authentication system
-- **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
+### 🎨 Modern Design & UX
+
+- **Yellow Theme**: Warm, inviting color scheme that evokes sunshine and adventure
+- **Full-Screen Layouts**: Immersive hero sections and full-width components
+- **Smooth Animations**: Framer Motion powered transitions and micro-interactions
+- **Responsive Design**: Pixel-perfect across desktop, tablet, and mobile devices
+
+### 🔍 Smart Search & Discovery
+
+- **Intelligent Search**: Advanced search with recent searches and suggestions
+- **Dynamic Filtering**: Filter by price, rating, location, duration, and activities
+- **Bangladesh Destinations**: Curated collection of beautiful Bangladesh locations
+- **Destination Details**: Rich destination pages with YouTube video integration
+
+### 📱 Core Functionality
+
+- **User Authentication**: Secure login/signup with persistent sessions
+- **Booking System**: Streamlined booking flow with confirmation emails
+- **Wishlist Management**: Save and organize favorite destinations
+- **User Dashboard**: Personal dashboard with statistics and booking history
+- **Notifications Center**: Real-time updates and travel tips
+
+### 🎥 Media & Content
+
+- **YouTube Integration**: Embedded destination videos in modal dialogs
+- **High-Quality Images**: Curated photography showcasing destinations
+- **Interactive Elements**: Hover effects, animations, and smooth transitions
+- **About Page**: Comprehensive company information and team details
+
+### 🌟 Enhanced User Experience
+
+- **404 Page**: Creative, travel-themed error page with floating animations
+- **Loading States**: Smooth loading animations and skeleton screens
+- **Toast Notifications**: User-friendly feedback for all actions
+- **Local Storage**: Persistent user preferences and recent searches
 
 ## 🛠️ Technology Stack
 
 - **Frontend**: React 19 + TypeScript
-- **Styling**: Tailwind CSS 4.x
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
-- **Routing**: React Router DOM 7
-- **State Management**: React Context + TanStack Query
-- **Build Tool**: Vite 7
-- **Deployment**: Vercel
+- **Styling**: Tailwind CSS 4.x with custom yellow theme
+- **Animations**: Framer Motion for smooth transitions
+- **Icons**: Lucide React for consistent iconography
+- **Routing**: React Router DOM 7 with nested routes
+- **State Management**: React Context + TanStack Query for server state
+- **Video**: YouTube embed integration
+- **Build Tool**: Vite 7 for fast development and building
+- **Deployment**: Vercel with automatic deployments
 
 ## 🏃‍♂️ Quick Start
 
 ### Prerequisites
 
-- Node.js 18+
-- npm or yarn
+- Node.js 18+ (Latest LTS recommended)
+- npm or yarn package manager
 
 ### Installation
 
-1. Clone the repository:
+1. **Clone the repository:**
 
 ```bash
 git clone https://github.com/salsadsid/ghuro.git
 cd ghuro
 ```
 
-2. Install dependencies:
+2. **Install dependencies:**
 
 ```bash
 npm install
+# or
+yarn install
 ```
 
-3. Start the development server:
+3. **Start the development server:**
 
 ```bash
 npm run dev
+# or
+yarn dev
 ```
 
-4. Open [http://localhost:5173](http://localhost:5173) in your browser
+4. **Open your browser:**
+   Navigate to [http://localhost:5173](http://localhost:5173)
 
-## 📦 Build for Production
+## 📦 Build & Deployment
+
+### Development Build
 
 ```bash
 npm run build
+npm run preview
 ```
 
-## 🚀 Deployment Options
+### Production Deployment
 
-### Vercel (Recommended)
+#### Vercel (Recommended)
 
 ```bash
 npx vercel --prod
 ```
 
-### Netlify
-
-1. Install Netlify CLI: `npm install -g netlify-cli`
-2. Build the project: `npm run build`
-3. Deploy: `netlify deploy --prod --dir=dist`
-
-### Firebase Hosting
-
-1. Install Firebase CLI: `npm install -g firebase-tools`
-2. Login: `firebase login`
-3. Initialize: `firebase init hosting`
-4. Build: `npm run build`
-5. Deploy: `firebase deploy`
-
-### GitHub Pages
-
-The repository includes a GitHub Actions workflow that automatically deploys to GitHub Pages on push to main/master branch.
-
-## 📁 Project Structure
+## 📁 Project Architecture
 
 ```
 src/
-├── components/          # Reusable UI components
-│   ├── ui/             # Base UI components (Button, Card, etc.)
-│   ├── shared/         # Shared components (Navbar, etc.)
-│   ├── FilterPanel.tsx # Advanced filtering component
-│   ├── Wishlist.tsx    # Wishlist functionality
-│   └── ReviewSection.tsx # Review and rating system
-├── pages/              # Page components
-│   ├── Home.tsx        # Landing page with destinations
-│   ├── Dashboard.tsx   # User dashboard
-│   └── Notifications.tsx # Notifications center
-├── contexts/           # React Context providers
-├── layouts/            # Layout components
-├── lib/               # Utility functions
-└── types/             # TypeScript type definitions
+├── components/
+│   ├── ui/                 # Base UI components (shadcn/ui)
+│   │   ├── button.tsx
+│   │   ├── card.tsx
+│   │   ├── dialog.tsx
+│   │   └── ...
+│   ├── shared/             # Shared components
+│   │   └── Navbar.tsx
+│   ├── SearchBox.tsx       # Smart search component
+│   ├── HomeExtraSection.tsx # Home page sections
+│   ├── Footer.tsx          # Site footer
+│   └── Wishlist.tsx        # Wishlist functionality
+├── pages/
+│   ├── Home.tsx            # Landing page with hero & destinations
+│   ├── About.tsx           # Company information
+│   ├── Dashboard.tsx       # User dashboard
+│   ├── Notifications.tsx   # Notifications center
+│   ├── DestinationDetails.tsx # Destination detail pages
+│   ├── NotFound.tsx        # Creative 404 page
+│   └── Auth.tsx            # Authentication
+├── contexts/
+│   └── AuthContext.tsx     # Authentication state management
+├── layouts/
+│   └── MainLayout.tsx      # Main application layout
+├── lib/
+│   ├── utils.ts            # Utility functions
+│   └── toast/              # Toast notification system
+├── types/
+│   └── index.ts            # TypeScript type definitions
+└── assets/                 # Static assets
 ```
 
-## 🎨 Features in Detail
+## 🎨 Design System
 
-### Advanced Filtering
+### Color Palette
 
-- **Price Range**: Custom slider component for price filtering
-- **Star Ratings**: Filter by destination ratings (1-5 stars)
-- **Location-based**: Filter by specific locations
-- **Duration**: Filter trips by length (1-14+ days)
-- **Activities**: Toggle filters for different activity types
+- **Primary**: Yellow (#EAB308) - Sunshine and adventure
+- **Secondary**: Orange (#F97316) - Energy and enthusiasm
+- **Neutral**: Gray scales for text and backgrounds
+- **Accent**: Red (#DC2626) for call-to-action elements
 
-### User Dashboard
+### Components
 
-- **Statistics Overview**: Total bookings, spending, upcoming trips
-- **Booking History**: Complete history with status tracking
-- **Quick Actions**: Easy navigation to key features
+- **Consistent Spacing**: 4px grid system with Tailwind utilities
+- **Typography**: Hierarchical text scales with proper contrast
+- **Interactive Elements**: Hover states and smooth transitions
+- **Responsive Breakpoints**: Mobile-first design approach
 
-### Wishlist System
+## 🌟 Featured Destinations
 
-- **Easy Saving**: One-click heart button to save destinations
-- **Management**: Dedicated wishlist page with sorting options
-- **Smart Sorting**: Sort by date added, price, or rating
+The app showcases a curated collection of destinations including:
 
-### Review System
+### International Destinations
 
-- **Star Ratings**: Interactive 5-star rating input
-- **Text Reviews**: Detailed review submission
-- **Helpful Voting**: Community-driven review quality
-- **Statistics**: Average ratings and review counts
+- **Paris, France** - City of Light and romance
+- **Santorini, Greece** - Stunning island paradise
+- **Tokyo, Japan** - Modern metropolis meets tradition
+- **Banff, Canada** - Majestic mountain landscapes
 
-## 🔧 Development
+### Bangladesh Highlights
 
-### Scripts
+- **Cox's Bazar** - World's longest sea beach
+- **Sundarbans** - UNESCO World Heritage mangrove forest
+- **Sylhet** - Tea gardens and natural beauty
+- **Bandarban** - Hill tracts and indigenous culture
+- **Saint Martin's Island** - Pristine coral island
+- **Rangamati** - Lake city in the hills
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
+## 🔧 Development Guidelines
 
-### Code Style
+### Code Standards
 
-This project uses:
+- **TypeScript**: Strict type checking enabled
+- **ESLint**: Code linting and formatting
+- **Component Patterns**: Consistent functional components with hooks
+- **File Organization**: Feature-based folder structure
 
-- ESLint for code linting
-- TypeScript for type safety
-- Tailwind CSS for styling
-- Consistent component patterns
+### Best Practices
 
-## 📄 License
+- **Performance**: Lazy loading and code splitting
+- **Accessibility**: ARIA labels and semantic HTML
+- **SEO**: Meta tags and proper document structure
+- **Mobile-First**: Responsive design from the ground up
 
-This project is licensed under the MIT License.
+## 🚀 Performance Features
+
+- **Vite HMR**: Hot module replacement for fast development
+- **Code Splitting**: Automatic route-based code splitting
+- **Image Optimization**: Responsive images with proper lazy loading
+- **Animation Optimization**: Hardware-accelerated CSS animations
+- **Bundle Analysis**: Optimized build output with tree shaking
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
+We welcome contributions! Please follow these steps:
 
-## 📧 Contact
+1. **Fork the repository**
+2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
+3. **Make your changes**: Follow the coding standards
+4. **Test thoroughly**: Ensure all features work as expected
+5. **Commit with clear messages**: `git commit -m 'Add amazing feature'`
+6. **Push to your branch**: `git push origin feature/amazing-feature`
+7. **Open a Pull Request**: Describe your changes clearly
 
-For questions or support, please contact [salman.dnj@gmail.com](mailto:salman.dnj@gmail.com)
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📧 Contact & Support
+
+- **Developer**: Salman Sadik Siddiquee
+- **Email**: [salman.dnj@gmail.com](mailto:salman.dnj@gmail.com)
+- **GitHub**: [@salsadsid](https://github.com/salsadsid)
+
+For bug reports, feature requests, or general questions, please open an issue on GitHub.
 
 ---
 
-Built with ❤️ using React + TypeScript + Vite
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
-
-export default tseslint.config([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+**Built with ❤️ and wanderlust** | © 2025 Ghuro Travel
