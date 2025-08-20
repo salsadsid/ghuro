@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { WishlistButton } from "../components/Wishlist";
 
 export default function Home() {
   const { isAuthenticated } = useAuth();
@@ -126,12 +127,15 @@ export default function Home() {
                   onClick={() => navigate(`/destination/${destination.id}`)}
                 />
                 <div className="p-6">
-                  <h3
-                    className="text-2xl font-semibold cursor-pointer hover:text-blue-600 mb-3"
-                    onClick={() => navigate(`/destination/${destination.id}`)}
-                  >
-                    {destination.name}
-                  </h3>
+                  <div className="flex items-start justify-between mb-3">
+                    <h3
+                      className="text-2xl font-semibold cursor-pointer hover:text-blue-600"
+                      onClick={() => navigate(`/destination/${destination.id}`)}
+                    >
+                      {destination.name}
+                    </h3>
+                    <WishlistButton destination={destination} />
+                  </div>
                   <p className="mt-2 text-base text-gray-600 mb-6">
                     {destination.description}
                   </p>

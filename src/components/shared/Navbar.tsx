@@ -4,9 +4,11 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/contexts/AuthContext";
+import { Bell, Heart, User } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Navbar({
@@ -22,7 +24,7 @@ export default function Navbar({
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-20 items-center justify-between px-6 max-w-7xl">
         <Link to="/" className="text-2xl font-bold">
-          TravelApp
+          Ghuro
         </Link>
 
         <nav className="flex items-center gap-8">
@@ -34,19 +36,68 @@ export default function Navbar({
           </Link>
 
           {isAuthenticated ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Avatar className="h-10 w-10 cursor-pointer">
-                  <AvatarImage src={user?.avatar} />
-                  <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={logout} className="text-base">
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <div className="flex items-center space-x-4">
+              {/* Wishlist Button */}
+              <Link to="/wishlist">
+                <Button variant="ghost" size="sm" className="p-2">
+                  <Heart className="h-5 w-5" />
+                </Button>
+              </Link>
+
+              {/* Notifications Button */}
+              <Link to="/notifications">
+                <Button variant="ghost" size="sm" className="p-2 relative">
+                  <Bell className="h-5 w-5" />
+                  {/* Notification badge */}
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                    2
+                  </span>
+                </Button>
+              </Link>
+
+              {/* User Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Avatar className="h-10 w-10 cursor-pointer">
+                    <AvatarImage src={user?.avatar} />
+                    <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuItem asChild>
+                    <Link
+                      to="/dashboard"
+                      className="flex items-center space-x-2"
+                    >
+                      <User className="h-4 w-4" />
+                      <span>Dashboard</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link
+                      to="/wishlist"
+                      className="flex items-center space-x-2"
+                    >
+                      <Heart className="h-4 w-4" />
+                      <span>Wishlist</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link
+                      to="/notifications"
+                      className="flex items-center space-x-2"
+                    >
+                      <Bell className="h-4 w-4" />
+                      <span>Notifications</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={logout} className="text-base">
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           ) : (
             <Link to="/auth">
               <Button variant="outline" className="h-12 px-6 text-base">
