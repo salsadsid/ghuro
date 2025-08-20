@@ -102,11 +102,11 @@ export default function Home() {
             <SearchBox onSearch={setSearchTerm} />
           </motion.div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-900/30 overflow-hidden" />
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-900/30 rounded-lg overflow-hidden" />
         <img
           src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=2565&auto=format&fit=crop"
           alt="Travel"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover rounded-lg"
         />
       </section>
 
