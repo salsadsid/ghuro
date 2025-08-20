@@ -21,6 +21,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useAuth } from "@/contexts/AuthContext";
+import { notification } from "@/lib/toast/notification";
 import { cn } from "@/lib/utils";
 import type { Destination } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -95,11 +96,12 @@ export default function BookingDialog({
     localStorage.setItem("completedBooking", JSON.stringify(bookingData));
 
     // Show success message
-    alert(
-      `Booking confirmed! Your trip to ${
+    notification.success({
+      title: "Booking Confirmed",
+      description: `Your trip to ${
         destination.name
-      } has been booked for ${format(values.date, "PPP")}.`
-    );
+      } has been booked for ${format(values.date, "PPP")}.`,
+    });
 
     onOpenChange(false);
   }

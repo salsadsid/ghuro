@@ -66,8 +66,8 @@ export function WishlistButton({ destination, onToggle }: WishlistButtonProps) {
       onClick={toggleWishlist}
       className={`p-2 ${
         isInWishlist
-          ? "text-red-500 hover:text-red-600"
-          : "text-gray-400 hover:text-red-500"
+          ? "text-yellow-500 hover:text-yellow-600"
+          : "text-gray-400 hover:text-yellow-500"
       }`}
     >
       <Heart className={`h-5 w-5 ${isInWishlist ? "fill-current" : ""}`} />
@@ -131,7 +131,7 @@ export default function WishlistPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 container mx-auto px-4 py-12">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}

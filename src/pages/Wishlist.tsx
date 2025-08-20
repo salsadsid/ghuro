@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/contexts/AuthContext";
+import { notification } from "@/lib/toast/notification";
 import type { Destination } from "@/types";
 import { motion } from "framer-motion";
 import { Heart, MapPin, Star, Trash2 } from "lucide-react";
@@ -32,7 +33,10 @@ export function WishlistButton({ destination, onToggle }: WishlistButtonProps) {
 
   const toggleWishlist = () => {
     if (!isAuthenticated) {
-      alert("Please log in to save destinations to your wishlist");
+      notification.error({
+        title: "Authentication Required",
+        description: "Please log in to save destinations to your wishlist",
+      });
       return;
     }
 

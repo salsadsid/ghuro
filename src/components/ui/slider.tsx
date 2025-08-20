@@ -42,7 +42,14 @@ export function Slider({
           step={step}
           value={value[0]}
           onChange={handleMinChange}
-          className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+          className="flex-1 h-2 bg-yellow-100 rounded-lg appearance-none cursor-pointer slider-thumb-yellow"
+          style={{
+            background: `linear-gradient(to right, #fbbf24 0%, #fbbf24 ${
+              ((value[0] - min) / (max - min)) * 100
+            }%, #fef3c7 ${
+              ((value[0] - min) / (max - min)) * 100
+            }%, #fef3c7 100%)`,
+          }}
         />
         <input
           type="range"
@@ -51,7 +58,14 @@ export function Slider({
           step={step}
           value={value[1]}
           onChange={handleMaxChange}
-          className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+          className="flex-1 h-2 bg-yellow-100 rounded-lg appearance-none cursor-pointer slider-thumb-yellow"
+          style={{
+            background: `linear-gradient(to right, #fbbf24 0%, #fbbf24 ${
+              ((value[1] - min) / (max - min)) * 100
+            }%, #fef3c7 ${
+              ((value[1] - min) / (max - min)) * 100
+            }%, #fef3c7 100%)`,
+          }}
         />
       </div>
     </div>
